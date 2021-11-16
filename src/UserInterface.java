@@ -10,6 +10,7 @@ public class UserInterface {
     }
 
     public void start() {
+
         System.out.println("Welcome to ANIMALBASE 2021");
         System.out.println("==========================");
         System.out.println("Java edition\n");
@@ -78,17 +79,42 @@ public class UserInterface {
                 a) Age
                 """);
         Scanner input = new Scanner(System.in);
-        char ch = input.next().trim().toLowerCase().charAt(0);
-        while(ch != 'n' && ch != 't' && ch != 'a') {
+        char sortBy = input.next().trim().toLowerCase().charAt(0);
+        while(sortBy != 'n' && sortBy != 't' && sortBy != 'a') {
             System.out.println("Please type 'n', 't' or 'a'");
+            sortBy = input.next().trim().toLowerCase().charAt(0);
+        }
+
+        System.out.println("""
+                Set the sort direction:
+                a) Ascending (0-9 a-z)
+                d) Descending (9-0 z-a)
+                t) Toggle (The opposite of what it was last time)
+                """);
+
+        char ch = input.next().trim().toLowerCase().charAt(0);
+        while(ch != 'a' && ch != 'd' && ch != 't') {
+            System.out.println("Please type 'a', 'd' or 't'");
             ch = input.next().trim().toLowerCase().charAt(0);
         }
+
+        String direction = ch=='a'?"ASC":(ch=='d'?"DESC":"TOGGLE");
+        //TODO sæt ind application.sortBy("name", direction);
 
         if(ch == 'n') {
             application.sortBy("name");
         } else if(ch == 't') {
             application.sortBy("type");
         } else if(ch == 'a') {
+            application.sortBy("age");
+        }
+
+
+        if(sortBy == 'n') {
+            application.sortBy("name");
+        } else if(sortBy == 't') {
+            application.sortBy("type");
+        } else if(sortBy == 'a') {
             application.sortBy("age");
         }
 

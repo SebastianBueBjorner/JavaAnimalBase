@@ -12,7 +12,15 @@ public class Animal {
     }
 
     public String getName() {
-        return name;
+        return this.name;
+    }
+
+    public String getType() {
+        return  this.type;
+    }
+
+    public int getAge() {
+        return this.age;
     }
 
     @Override
