@@ -6,6 +6,7 @@ import java.util.Comparator;
 
 public class AnimalBase {
     private ArrayList<Animal> animals;
+    private SuperFlexibleComparator comp = new SuperFlexibleComparator("name", "ASC");
 
     public AnimalBase() {
         animals = new ArrayList<>();
@@ -31,56 +32,12 @@ public class AnimalBase {
         return animals;
     }
 
-    private Comparator<Animal> nameCom = new Comparator<Animal>() {
-        @Override
-        public int compare(Animal o1, Animal o2) {
-            if(o1.getName().compareTo(o2.getName()) <=0) {
-                return -1;
-            } else {
-                return 1;
-            }
-        }
-    };
-
-    private Comparator<Animal> typeCom = new Comparator<Animal>() {
-        @Override
-        public int compare(Animal o1, Animal o2) {
-            if(o1.getType().compareTo(o2.getType()) <=0) {
-                return -1;
-            } else {
-                return 1;
-            }
-        }
-    };
-
-    private Comparator<Animal> ageCom = new Comparator<Animal>() {
-        @Override
-        public int compare(Animal o1, Animal o2) {
-            if(o1.getAge() < o2.getAge()) {
-                return -1;
-            } else {
-                return 1;
-            }
-        }
-    };
 
 
-    public void sortBy(String sort) {
-        // TODO: Implement sorting!
-        System.out.println("TODO: Sort the list of animals by: " + sort);
-
-        if (sort.contains("name")) {
-            Collections.sort(animals, nameCom);
-
-        } else if (sort.contains("type")) {
-            Collections.sort(animals, typeCom);
-
-        } else if (sort.contains("age")) {
-            Collections.sort(animals, ageCom);
-
-        }
-
-
+    public void sortBy(String sort, String direction) {
+        comp.setDirection(direction);
+        comp.setType(sort);
+        Collections.sort(animals, comp);
     }
 
     public void createNewAnimal(String name, String description, String type, int age) {
